@@ -2,7 +2,7 @@ from dotenv import load_dotenv
 import os
 import sqlite3
 import streamlit as st
-import google.generativai as genai
+import google.generativeai as genai
 
 load_dotenv()  
 
@@ -57,3 +57,15 @@ if generated SQL query contains triple quotes, remove them, and give the SQL que
 You should not allow DML commands like INSERT, UPDATE, DELETE, DROP, CREATE, ALTER, TRUNCATE etc.
 \n\n
 """
+st.set_page_config(page_title="AskSQL")
+st.header("Gemini Application to retrieve SQL data using English")
+question=st.text_input("Enter your question: ",key="input")
+submit=st.button("Submit")
+
+if submit:
+    response=get_gemini_response(prompt, question)
+    print(response)
+    response=read_sql_query(response,"employee.db")
+    st.subheader("The LLM response is")
+    for row in response:
+        st.write(row)
