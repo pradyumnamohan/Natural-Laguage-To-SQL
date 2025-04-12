@@ -1,6 +1,6 @@
 import sqlite3
 
-connection = sqlite3.connect('employee.db')
+connection = sqlite3.connect('emp.db')
 cursor = connection.cursor()
 
 table_info = """
