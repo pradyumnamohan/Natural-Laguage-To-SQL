@@ -8,7 +8,7 @@ load_dotenv()
 
 # Set up the Google Generative AI API key
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
-model = genai.GenerativeModel('gemini-pro')
+model = genai.GenerativeModel('gemini-1.5-flash')
 
 def get_gemini_response(prompt, question):
     try:
@@ -65,7 +65,7 @@ submit=st.button("Submit")
 if submit:
     response=get_gemini_response(prompt, question)
     print(response)
-    response=read_sql_query(response,"employee.db")
+    response=read_sql_query(response,"emp.db")
     st.subheader("The LLM response is")
     for row in response:
         st.write(row)
